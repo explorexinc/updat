@@ -29,6 +29,7 @@ Future<File> getDownloadFileLocation(String release, String appName, String exte
     downloadDir.absolute.path,
     '$appName-$release.$extension',
   );
+  print('$appName-$release.$extension');
   return File(filePath);
 }
 
