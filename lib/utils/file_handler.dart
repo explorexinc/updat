@@ -29,7 +29,7 @@ Future<File> getDownloadFileLocation(String release, String appName, String exte
     downloadDir.absolute.path,
     '$appName-$release.$extension',
   );
-  print('$appName-$release.$extension');
+  // print('$appName-$release.$extension');
   return File(filePath);
 }
 
@@ -38,16 +38,16 @@ Future<File> downloadRelease(File file, String url) async {
     Uri.parse(url),
   );
   if (res.statusCode == 200) {
-    print("autoupdate: download res.statusCode 200");
+    // print("autoupdate: download res.statusCode 200");
     await file.writeAsBytes(res.bodyBytes);
-    print("file: $file");
+    // print("file: $file");
     // Return with new installed status
     return file;
   } else {
-    print(
-      'There was an issue downloading the file, plese try again later.\n'
-      'Code ${res.statusCode}',
-    );
+    // print(
+    //   'There was an issue downloading the file, plese try again later.\n'
+    //   'Code ${res.statusCode}',
+    // );
     throw Exception(
       'There was an issue downloading the file, plese try again later.\n'
       'Code ${res.statusCode}',
@@ -57,10 +57,10 @@ Future<File> downloadRelease(File file, String url) async {
 
 Future<void> openInstaller(File file) async {
   if (file.existsSync()) {
-    print('autoupdater: pre - open installer. path: ${file.absolute.path}');
+    // print('autoupdater: pre - open installer. path: ${file.absolute.path}');
     await openUri(Uri(path: file.absolute.path, scheme: 'file'));
   } else {
-    print('Installer does not exists, you have to download it first');
+    // print('Installer does not exists, you have to download it first');
     throw Exception(
       'Installer does not exists, you have to download it first',
     );
