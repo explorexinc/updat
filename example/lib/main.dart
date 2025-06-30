@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
       updateChipBuilder: floatingExtendedChipWithSilentDownload,
       currentVersion: '0.0.1',
       callback: (status) {
-        print(status);
+        //  print(status);
       },
       child: Scaffold(
         /*floatingActionButton: UpdatWidget(
