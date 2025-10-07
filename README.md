@@ -1,6 +1,6 @@
 # Updat - The simple-to-use, flutter-based desktop update package
 
-![Logo](https://github.com/aguilaair/updat/blob/main/promo/banner.svg)
+![Logo](https://github.com/aguilaair/updat/assets/17295513/b7a60ca6-bc87-4abc-82fa-cf327ef73504)
 
 Updat is a simple-to-use reliable flutter-native updater that handles your application's updates. All you need is a place to host your files and a place to check for the latest version.
 
@@ -8,11 +8,12 @@ Updat is a simple-to-use reliable flutter-native updater that handles your appli
   <a href="https://github.com/aguilaair/updat/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/aguilaair/updat?color=orange&style=flat-square"></a>
   <a href="https://pub.dev/packages/updat"><img alt="Pub.dev" src="https://img.shields.io/pub/v/updat.svg?label=Pub.dev&color=blue&style=flat-square"></a>
   <a href="https://github.com/aguilaair/updat/issues"><img alt="Github Issues" src="https://img.shields.io/github/issues/aguilaair/updat?label=Issues&color=green&style=flat-square"></a>
+  <a href="https://github.com/aguilaair/updat/wiki"><img alt="Github Wiki" src="https://img.shields.io/badge/GitHub-Wiki-black"></a>
  </div>
 
 ## Demo
 
-![demo](https://github.com/aguilaair/updat/blob/main/promo/demo.gif)
+![demo](https://github.com/aguilaair/updat/assets/17295513/9e0be181-0772-4cf9-8c4e-8933b407137f)
 
 ## Installing
 
@@ -52,23 +53,23 @@ Want to learn how to integrate Updat in your app?
 
 ### Available `UpdatWidget` arguments
 
-| Parameter           | Type      | Value                                                                                                                                    | Default   |
-| :------------------ | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :-------- |
-| **`currentVersion`**         | `String`   | **Required**. Must be a semantic version. This is the current package's version.                                                                 | N/A       |
-| **`getLatestVersion`**    | `Future<String>`  | **Required**. Must be a semantic version. This should request the latest version to the server                                  | N/A |
-| **`getBinaryUrl`** | `Future<String>` | **Required**. This should provide the link download the binary for a certain app version. Arguments: `latestVersion` | N/A       |
-| **`appNme`** | `String` | **Required**. The Application's name. It is used to name the binaries when downloading. | N/A       |
-| **`getChangelog`** | `Future<String>` | This will render a plain text view of the changelog. | N/A       |
-| **`callback`** | `void Function(UpdatStatus)` | A callback that is called when the UpdatStatus gets updated. | N/A       |
-| **`getDownloadFileLocation`** | `Future<File>` | Choose where to download the update. | N/A       |
-| **`updateChipBuilder`** | `Widget Function(...)` | Overrides the default update chip. | N/A       |
-| **`updateDialogBuilder`** | `Widget Function(...)` | Overrides the default update dialog. | N/A       |
-| **`openOnDownload`** | `bool` | Whether Updat should open the installer automatically once it has been downloaded. | `true`      |
-| **`closeOnInstall`** | `bool` | Whether Updat should close the application automatically once it has been downloaded. | `false`      |
+| Parameter                     | Type                         | Value                                                                                                                | Default |
+|:------------------------------|:-----------------------------|:---------------------------------------------------------------------------------------------------------------------|:--------|
+| **`currentVersion`**          | `String`                     | **Required**. Must be a semantic version. This is the current package's version.                                     | N/A     |
+| **`getLatestVersion`**        | `Future<String>`             | **Required**. Must be a semantic version. This should request the latest version to the server                       | N/A     |
+| **`getBinaryUrl`**            | `Future<String>`             | **Required**. This should provide the link download the binary for a certain app version. Arguments: `latestVersion` | N/A     |
+| **`appNme`**                  | `String`                     | **Required**. The Application's name. It is used to name the binaries when downloading.                              | N/A     |
+| **`getChangelog`**            | `Future<String>`             | This will render a plain text view of the changelog.                                                                 | N/A     |
+| **`callback`**                | `void Function(UpdatStatus)` | A callback that is called when the UpdatStatus gets updated.                                                         | N/A     |
+| **`getDownloadFileLocation`** | `Future<File>`               | Choose where to download the update.                                                                                 | N/A     |
+| **`updateChipBuilder`**       | `Widget Function(...)`       | Overrides the default update chip.                                                                                   | N/A     |
+| **`updateDialogBuilder`**     | `Widget Function(...)`       | Overrides the default update dialog.                                                                                 | N/A     |
+| **`openOnDownload`**          | `bool`                       | Whether Updat should open the installer automatically once it has been downloaded.                                   | `true`  |
+| **`closeOnInstall`**          | `bool`                       | Whether Updat should close the application automatically once it has been downloaded.                                | `false` |
 
 ### Theming
 
-![Logo](https://github.com/aguilaair/updat/blob/main/promo/banner-2.svg)
+![Logo](https://github.com/aguilaair/updat/assets/17295513/05cbe14b-e240-4fe1-95cd-c10fdd51b665)
 
 Updat is extremely easy to theme. We also use `updateChipBuilder` and `updateDialogBuilder` internally to design our widgets, so you have the same customizability we do. We provide a couple of themes to get you started.
 
@@ -90,3 +91,12 @@ To change the theme simply add the desired theme to the builder and you're set.
 #### Dialogs
 
 - `defaultDialog` which is the default, M2 and M3 dialog that shows by default.
+
+### Advanced Usage  
+If you need to send additional HTTP headers when downloading a release asset, you may define your
+headers by setting the `downloadReleaseHeaders` property of `UpdatGlobalOptions`, you should probably do this in the main function of your code.
+```dart
+UpdatGlobalOptions.downloadReleaseHeaders = {
+  "Authorization": "Bearer gh_pat_1234567889abcdefghijklm",
+}
+```

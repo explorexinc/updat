@@ -1,3 +1,24 @@
+## 1.4.0
+
+* Update dependencies
+
+## 1.3.2
+
+* Fix images not displaying on pub.dev
+* Update dependencies
+
+## 1.3.1
+
+* Add support for `updatWindowManager` to mobile platforms and web. (Just bypasses the updat system)
+* Update dependencies
+
+## 1.3.0
+
+* Support unzipping (<https://github.com/aguilaair/updat/issues/5>)
+* Allow custom headers to be provided for GET methods (<https://github.com/aguilaair/updat/issues/4>)
+* Fix closeOnInstall (<https://github.com/aguilaair/updat/issues/9>)
+* Fix launchOnExit (<https://github.com/aguilaair/updat/issues/8>)
+
 ## 1.2.0+1
 
 * Change to MPL-2.0 license :D

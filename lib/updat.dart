@@ -1,14 +1,12 @@
-library updat;
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:updat/theme/chips/default.dart';
-import 'package:updat/theme/dialogs/defualt.dart';
+import 'package:updat/theme/dialogs/default.dart';
 import 'package:updat/utils/file_handler.dart';
 
-/// This widget is the defualt Updat widget, that will only be shown when a new update is detected (This is checked only once per widget initialization by default).
+/// This widget is the default Updat widget, that will only be shown when a new update is detected (This is checked only once per widget initialization by default).
 /// If you want a custom widget to be shown, you can pass it as the [updateChipBuilder] parameter.
 class UpdatWidget extends StatefulWidget {
   const UpdatWidget({
@@ -23,8 +21,8 @@ class UpdatWidget extends StatefulWidget {
     this.callback,
     this.openOnDownload = true,
     this.closeOnInstall = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   ///  This function will be invoked to ckeck if there is a new version available. The return string must be a semantic version.
   final Future<String?> Function() getLatestVersion;
@@ -151,8 +149,7 @@ class _UpdatWidgetState extends State<UpdatWidget> {
           this.latestVersion = Version.parse(latestVersion);
           if (this.latestVersion! > appVersion) {
             if (widget.getChangelog != null) {
-              widget.getChangelog!(latestVersion, widget.currentVersion)
-                  .then((changelogRec) {
+              widget.getChangelog!(latestVersion, widget.currentVersion).then((changelogRec) {
                 if (changelogRec != null && mounted) {
                   setState(() {
                     status = UpdatStatus.availableWithChangelog;
@@ -220,8 +217,7 @@ class _UpdatWidgetState extends State<UpdatWidget> {
   }
 
   void startUpdate() async {
-    if (status != UpdatStatus.available &&
-        status != UpdatStatus.availableWithChangelog) {
+    if (status != UpdatStatus.available && status != UpdatStatus.availableWithChangelog) {
       if (status == UpdatStatus.readyToInstall) {
         launchInstaller();
       }
@@ -235,8 +231,7 @@ class _UpdatWidgetState extends State<UpdatWidget> {
 
     // Get the file location to download the file to.
     if (widget.getDownloadFileLocation != null) {
-      installerFile =
-          await widget.getDownloadFileLocation!(latestVersion!.toString());
+      installerFile = await widget.getDownloadFileLocation!(latestVersion!.toString());
     } else {
       installerFile = await getDownloadFileLocation(
         latestVersion!.toString(),
@@ -249,7 +244,7 @@ class _UpdatWidgetState extends State<UpdatWidget> {
       // Download the file.
 
       try {
-        await downloadRelease(installerFile!, url);
+        await downloadRelease(installerFile!, url, widget.appName);
       } catch (e) {
         setState(() {
           status = UpdatStatus.error;
@@ -266,13 +261,12 @@ class _UpdatWidgetState extends State<UpdatWidget> {
   }
 
   Future<void> launchInstaller() async {
-    if (status != UpdatStatus.readyToInstall &&
-        status != UpdatStatus.dismissed) {
+    if (status != UpdatStatus.readyToInstall && status != UpdatStatus.dismissed) {
       return;
     }
     // Open the file.
     try {
-      await openInstaller(installerFile!);
+      await openInstaller(installerFile!, widget.appName);
       if (widget.closeOnInstall) exit(0);
     } catch (e) {
       setState(() {
